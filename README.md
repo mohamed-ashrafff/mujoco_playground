@@ -4,20 +4,22 @@
   <a href="#"><img alt="MuJoCo Playground" src="assets/banner.png" width="100%"></a>
 </h1>
 
-A comprehensive suite of environments for robot learning research, accelerated by [MuJoCo MJX](https://github.com/google-deepmind/mujoco/tree/main/mjx).
+A comprehensive suite of GPU-acclerated environments for robot learning research and sim-to-real, accelerated by [MuJoCo MJX](https://github.com/google-deepmind/mujoco/tree/main/mjx).
 
 Features include:
 
-- Classic control environments from `dm_control` reimplemented in MJX
-- Quadruped and bipedal locomotion environments
-- Non-prehensile and dexterous manipulation environments
-- Vision-based support via Madrona
+- Classic control environments from `dm_control` reimplemented in MJX.
+- Quadruped and bipedal locomotion environments.
+- Non-prehensile and dexterous manipulation environments.
+- Vision-based support via [Madrona-MJX](https://github.com/shacklettbp/madrona_mjx).
 
 ## Installation
 
 ### From PyPI
 
-```bash
+Install from PyPI is as easy as:
+
+```sh
 pip install playground
 ```
 
@@ -27,67 +29,56 @@ pip install playground
 > Requires Python 3.9 or later.
 
 1. `pip install -U "jax[cuda12]"`
-    * Verify GPU backend: `python -c "import jax; print(jax.default_backend())"` should print `gpu`
-2. `git clone git@github.com:kevinzakka/mujoco_playground.git`
-3. `git clone git@github.com:google-deepmind/mujoco_menagerie.git`
-4. `mv mujoco_menagerie mujoco_playground/mujoco_menagerie`
-5. `pip install -e ".[all]"`
+    * Verify GPU backend: python -c "import jax; print(jax.default_backend())" should print gpu
+2. `git clone git@github.com:google-deepmind/mujoco_playground.git`
+3. `cd mujoco_playground`
+4. `uv pip install -e ".[all]"`
 
-## Common Gotchas
+#### Madrona-MJX (optional)
 
-- Version mismatch between mjx and mujoco can cause issues. If encountered:
-    ```bash
-    pip uninstall mujoco mujoco-mjx
-    pip install --upgrade mujoco mujoco-mjx
-    ```
+For vision-based environments, follow the installation instructions on the [Madrona-MJX](https://github.com/shacklettbp/madrona_mjx?tab=readme-ov-file#installation) repository.
 
-## Playground environments
+## Getting started
 
-### Locomotion Suite
+To try out MuJoCo Playground locally on a simple locomotion environment, run the following:
 
-| Environment | Visualization
-|------------|---------------|
-| `Env1`     | [hopper.gif]  |
-| `Env2`     | [walker.gif]  |
-| `Env3`     | [humanoid.gif]|
+```py
+import jax
+import jax.numpy as jp
+from mujoco_playground import registry
 
-### Manipulation Suite
+env = registry.load('Go1JoystickFlatTerrain')
+state = jax.jit(env.reset)(jax.random.PRNGKey(0))
+print(state.obs)
+state = jax.jit(env.step)(state, jp.zeros(env.action_size))
+print(state.obs)
+```
 
-| Environment | Description | Simulation | Real Robot |
-|------------|-------------|------------|------------|
-| `ReachEnv` | Reaching task with robot arm | [reach.gif] | [real_reach.gif] |
-| `PushEnv` | Object pushing with robot arm | [push.gif] | [real_push.gif] |
-| `PickPlaceEnv` | Pick and place objects | [pick.gif] | N/A |
+For detailed tutorials on using MuJoCo Playground, see:
 
-### DM Control Suite
+1. Intro. to the Playground with DM Control Suite [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/notebooks/dm_control_suite.ipynb)
+2. Locomotion Environments [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/notebooks/locomotion.ipynb)
+3. Manipulation Environments [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/notebooks/manipulation.ipynb)
 
-| Environment | Description | Simulation |
-|------------|-------------|------------|
-| `Cartpole` | Classic cartpole balancing | [cartpole.gif] |
-| `Pendulum` | Inverted pendulum control | [pendulum.gif] |
-| `Cheetah` | 2D cheetah running | [cheetah.gif] |
-| `Finger` | Finger spinning task | [finger.gif] |
+For tutorials on using MuJoCo Playground with Madrona-MJX, see:
 
-## Frequently Asked Questions
-
-* Q1
-* Q2
-* Q3
+1. Training CartPole from Vision [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/training_vision_1.ipynb)
+2. Robotic Manipulation from Vision [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/training_vision_2.ipynb)
 
 ## How can I contribute?
 
-Install the library and use it! Report bugs in the issue tracker. If you are a developer with some robotics experience looking to hack on open source, check out the [contribution guidelines](CONTRIBUTING).
+Get started by installing the library and exploring its features! Found a bug? Report it in the issue tracker. Interested in contributing? If you’re a developer with robotics experience, we’d love your help—check out the [contribution guidelines](CONTRIBUTING) for more details.
 
 ## Citation
 
 If you use Playground in your scientific works, please cite it as follows:
 
 ```bibtex
-@misc{mujoco_playground2025,
-  author = {[Your Name]},
-  title = {MuJoCo Playground},
+@misc{mujoco_playground_2025,
+  title = {MuJoCo Playground: An open-source framework for GPU-accelerated robot learning and sim-to-real transfer.},
+  author = {Zakka, Kevin and Tabanpour, Baruch and Liao, Qiayuan and Haiderbhai, Mustafa and Holt, Samuel and Luo, Jing Yuan and Allshire, Arthur and Frey, Erik and Sreenath, Koushil and Kahrs, Lueder A. and Sferrazza, Carlo and Tassa, Yuval and Abbeel, Pieter},
   year = {2025},
   publisher = {GitHub},
-  url = {https://github.com/google-deepmind/mujoco-playground}
+  url = {https://github.com/google-deepmind/mujoco_playground}
 }
 ```
