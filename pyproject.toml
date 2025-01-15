@@ -29,10 +29,10 @@ dependencies = [
     "jax",
     "lxml",
     "ml_collections",
-    "mujoco-mjx",
-    "mujoco",
+    "mujoco-mjx>=3.2.7",
+    "mujoco>=3.2.7",
     "tqdm",
-    "brax",  # TODO(btaba): Remove this dependency.
+    "brax>=0.12.1",
 ]
 keywords = ["mjx", "mujoco", "dm_control"]
 
