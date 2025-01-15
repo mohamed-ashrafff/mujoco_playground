@@ -23,7 +23,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install uv
-          uv pip install -e .[all]
+          uv pip install --system -e ".[test]"
       # - name: Install submodules
       #   run: |
       #     git submodule update --init --recursive
