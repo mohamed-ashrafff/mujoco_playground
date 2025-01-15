@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mujoco_playground"
-version = "0.0.0"
+name = "playground"
+version = "0.0.1"
 readme = "README.md"
 authors = [
     {name = "Google DeepMind", email = "mujoco@deepmind.com"},
@@ -143,22 +143,8 @@ output = ".pytype"
 report_errors = true
 
 [tool.hatch.build]
-artifacts = [
-    "mujoco_playground/mujoco_menagerie/google_barkour_vb/**/*",
-    "mujoco_playground/mujoco_menagerie/berkeley_humanoid/**/*",
-    "mujoco_playground/mujoco_menagerie/unitree_g1/**/*",
-    "mujoco_playground/mujoco_menagerie/unitree_go1/**/*",
-    "mujoco_playground/mujoco_menagerie/unitree_h1/**/*",
-    "mujoco_playground/mujoco_menagerie/robotis_op3/**/*",
-    "mujoco_playground/mujoco_menagerie/boston_dynamics_spot/**/*",
-    "mujoco_playground/mujoco_menagerie/aloha/**/*",
-    "mujoco_playground/mujoco_menagerie/franka_emika_panda/**/*",
-    "mujoco_playground/mujoco_menagerie/robotiq_2f85_v4/**/*",
-    "mujoco_playground/mujoco_menagerie/leap_hand/**/*"
-]
 include = [
     "mujoco_playground/__init__.py",
     "mujoco_playground/_src/**/*",
     "mujoco_playground/config/**/*",
-    "mujoco_playground/experimental/**/*",
 ]
