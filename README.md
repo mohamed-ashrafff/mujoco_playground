@@ -13,11 +13,11 @@ Features include:
 - Non-prehensile and dexterous manipulation environments.
 - Vision-based support available via [Madrona-MJX](https://github.com/shacklettbp/madrona_mjx).
 
+For more details, checkout the project [website](https://playground.mujoco.org/).
+
 ## Installation
 
-### From PyPI
-
-Install from PyPI is as easy as:
+You can install MuJoCo Playground directly from PyPI:
 
 ```sh
 pip install playground
