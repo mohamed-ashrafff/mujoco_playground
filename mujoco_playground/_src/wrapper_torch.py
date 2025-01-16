@@ -228,5 +228,7 @@ class RSLRLBraxWrapper(VecEnv):
   def get_env_info(self):
     info = {}
     info['action_space'] = self.action_space  # pytype: disable=attribute-error
-    info['observation_space'] = self.observation_space  # pytype: disable=attribute-error
+    info['observation_space'] = (
+        self.observation_space
+    )  # pytype: disable=attribute-error
     return info
