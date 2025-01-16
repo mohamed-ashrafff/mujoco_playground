@@ -18,7 +18,6 @@ from typing import Any, Dict, Optional, Union
 
 import jax
 import jax.numpy as jp
-from jax.scipy.spatial.transform import Rotation
 from ml_collections import config_dict
 from mujoco import mjx
 from mujoco.mjx._src import math
@@ -310,10 +309,7 @@ class Handstand(go1_base.Go1Env):
       info: dict[str, Any],
       done: jax.Array,
   ) -> dict[str, jax.Array]:
-    mat = data.site_xmat[self._imu_site_id]
-    r = Rotation.from_matrix(mat)
-    torso_rot = r.as_quat(scalar_first=True)
-    forward = math.rotate(jp.array([1, 0, 0]), torso_rot)
+    forward = data.site_xmat[self._imu_site_id] @ jp.array([1.0, 0.0, 0.0])
     joint_torques = data.actuator_force
     torso_height = data.site_xpos[self._imu_site_id][2]
     return {
