@@ -4,7 +4,7 @@
   <a href="#"><img alt="MuJoCo Playground" src="assets/banner.png" width="100%"></a>
 </h1>
 
-A comprehensive suite of GPU-accelerated environments for robot learning research and sim-to-real, accelerated by [MuJoCo MJX](https://github.com/google-deepmind/mujoco/tree/main/mjx).
+A comprehensive suite of GPU-accelerated environments for robot learning research and sim-to-real, built with [MuJoCo MJX](https://github.com/google-deepmind/mujoco/tree/main/mjx).
 
 Features include:
 
@@ -62,8 +62,8 @@ For detailed tutorials on using MuJoCo Playground, see:
 
 For tutorials on using MuJoCo Playground with Madrona-MJX, see:
 
-1. Training CartPole from Vision [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/training_vision_1.ipynb)
-2. Robotic Manipulation from Vision [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/training_vision_2.ipynb)
+1. Training CartPole from Vision [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/notebooks/training_vision_1.ipynb)
+2. Robotic Manipulation from Vision [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/mujoco_playground/blob/main/learning/notebooks/training_vision_2.ipynb)
 
 ## How can I contribute?
 
@@ -90,5 +90,3 @@ The texture used in the rough terrain for the locomotion environments is from [P
 All other content in this repository is licensed under the Apache License, Version 2.0. A copy of this license is provided in the top-level [LICENSE](LICENSE) file in this repository. You can also obtain it from https://www.apache.org/licenses/LICENSE-2.0.
 
 This is not an officially supported Google product.
-
-
