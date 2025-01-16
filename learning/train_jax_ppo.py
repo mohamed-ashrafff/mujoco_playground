@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+# pylint: disable=wrong-import-position
 """Train a PPO agent using JAX on the specified environment."""
 
 import os
@@ -39,7 +40,6 @@ import jax
 import jax.numpy as jp
 import mediapy as media
 from ml_collections import config_dict
-from ml_collections import config_flags
 import mujoco
 from orbax import checkpoint as ocp
 from tensorboardX import SummaryWriter
@@ -267,11 +267,11 @@ def main(argv):
   print(f"Checkpoint path: {ckpt_path}")
 
   # Save environment configuration
-  with open(ckpt_path / "config.json", "w") as fp:
+  with open(ckpt_path / "config.json", "w", encoding="utf-8") as fp:
     json.dump(env_cfg.to_json(), fp, indent=4)
 
   # Define policy parameters function for saving checkpoints
-  def policy_params_fn(current_step, make_policy, params):
+  def policy_params_fn(current_step, make_policy, params):  # pylint: disable=unused-argument
     orbax_checkpointer = ocp.PyTreeCheckpointer()
     save_args = orbax_utils.save_args_from_target(params)
     path = ckpt_path / f"{current_step}"
@@ -352,7 +352,7 @@ def main(argv):
   )
 
   # Train or load the model
-  make_inference_fn, params, _ = train_fn(
+  make_inference_fn, params, _ = train_fn(  # pylint: disable=no-value-for-parameter
       environment=env,
       progress_fn=progress,
       eval_env=None if _VISION.value else eval_env,
@@ -389,7 +389,7 @@ def main(argv):
   rollout = [state0]
 
   # Run evaluation rollout
-  for i in range(env_cfg.episode_length):
+  for _ in range(env_cfg.episode_length):
     act_rng, rng = jax.random.split(rng)
     ctrl, _ = jit_inference_fn(state.obs, act_rng)
     state = jit_step(state, ctrl)

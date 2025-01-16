@@ -30,6 +30,7 @@ def uniform_quat(rng: jax.Array) -> jax.Array:
   ])
 
 
+# pylint: disable=line-too-long
 # Reference: https://github.com/google-deepmind/dm_control/blob/main/dm_control/locomotion/arenas/bowl.py
 def random_hfield(
     model: mujoco.MjModel,
@@ -38,7 +39,7 @@ def random_hfield(
     terrain_smoothness: float = 0.4,
 ):
   """Randomize the heightfield."""
-  from scipy import ndimage  # pylint: disable=g-import-not-at-top
+  from scipy import ndimage  # pylint: disable=g-import-not-at-top, import-outside-toplevel
 
   res = model.hfield_nrow[heightfield_id]
 

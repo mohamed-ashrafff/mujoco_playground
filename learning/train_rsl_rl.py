@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+# pylint: disable=wrong-import-position
 """Train a PPO agent using RSL-RL for the specified environment."""
 
 import os
@@ -28,7 +29,6 @@ from absl import app
 from absl import flags
 from absl import logging
 import jax
-import jax.numpy as jp
 import mediapy as media
 from ml_collections import config_dict
 import mujoco
@@ -133,7 +133,9 @@ def main(argv):
     wandb.config.update({"env_name": _ENV_NAME.value})
 
   # Save environment config to JSON
-  with open(os.path.join(ckpt_path, "config.json"), "w") as fp:
+  with open(
+      os.path.join(ckpt_path, "config.json"), "w", encoding="utf-8"
+  ) as fp:
     json.dump(env_cfg.to_json(), fp, indent=4)
 
   # Domain randomization
@@ -143,7 +145,7 @@ def main(argv):
   render_trajectory = []
 
   # Callback to gather states for rendering
-  def render_callback(env, state):
+  def render_callback(_, state):
     render_trajectory.append(state)
 
   # Create the environment
