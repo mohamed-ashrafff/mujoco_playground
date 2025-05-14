@@ -21,6 +21,8 @@
 
   <worldbody>
     <geom name="floor" size="0 0 0.01" type="plane" material="groundplane"/>
+    <geom name="left_foot_target" type="sphere" size="0.05 0.05 0.05" rgba="1 0 0 0.5"/>
+    <geom name="right_foot_target" type="sphere" size="0.05 0.05 0.05" rgba="0 0 1 0.5"/>
   </worldbody>
 
   <keyframe>

@@ -264,6 +264,8 @@ def main(argv):
   ckpt_path.mkdir(parents=True, exist_ok=True)
   print(f"Checkpoint path: {ckpt_path}")
 
+  import mujoco_viewer
+  
   # Save environment configuration
   with open(ckpt_path / "config.json", "w", encoding="utf-8") as fp:
     json.dump(env_cfg.to_dict(), fp, indent=4)
@@ -412,11 +414,12 @@ def main(argv):
   scene_option.flags[mujoco.mjtVisFlag.mjVIS_PERTFORCE] = False
   scene_option.flags[mujoco.mjtVisFlag.mjVIS_CONTACTFORCE] = False
 
-  frames = eval_env.render(
-      traj, height=480, width=640, scene_option=scene_option
-  )
-  media.write_video("rollout.mp4", frames, fps=fps)
-  print("Rollout video saved as 'rollout.mp4'.")
+
+  # frames = eval_env.render(
+  #     traj, height=480, width=640, scene_option=scene_option
+  # )
+  # media.write_video("rollout.mp4", frames, fps=fps)
+  # print("Rollout video saved as 'rollout.mp4'.")
 
 
 if __name__ == "__main__":

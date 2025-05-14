@@ -38,6 +38,7 @@ ALL_ENVS = (
 
 
 def get_default_config(env_name: str):
+  print(f"Getting default config for {env_name}")
   if env_name in manipulation.ALL_ENVS:
     return manipulation.get_default_config(env_name)
   elif env_name in locomotion.ALL_ENVS:

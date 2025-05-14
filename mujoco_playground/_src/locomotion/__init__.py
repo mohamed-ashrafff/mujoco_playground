@@ -26,6 +26,8 @@ from mujoco_playground._src.locomotion.barkour import joystick as barkour_joysti
 from mujoco_playground._src.locomotion.berkeley_humanoid import joystick as berkeley_humanoid_joystick
 from mujoco_playground._src.locomotion.berkeley_humanoid import randomize as berkeley_humanoid_randomize
 from mujoco_playground._src.locomotion.g1 import joystick as g1_joystick
+from mujoco_playground._src.locomotion.g1.Contact_Goals_Task import contact as g1_contact
+from mujoco_playground._src.locomotion.g1.Contact_Goals_Task import stance as g1_stance
 from mujoco_playground._src.locomotion.g1 import randomize as g1_randomize
 from mujoco_playground._src.locomotion.go1 import getup as go1_getup
 from mujoco_playground._src.locomotion.go1 import handstand as go1_handstand
@@ -47,6 +49,12 @@ _envs = {
     ),
     "BerkeleyHumanoidJoystickRoughTerrain": functools.partial(
         berkeley_humanoid_joystick.Joystick, task="rough_terrain"
+    ),
+    "G1Contact": functools.partial(
+      g1_contact.Contact, task="flat_terrain"
+    ),
+    "G1Stance": functools.partial(
+      g1_stance.Stance, task="flat_terrain"
     ),
     "G1JoystickFlatTerrain": functools.partial(
         g1_joystick.Joystick, task="flat_terrain"
@@ -89,6 +97,8 @@ _cfgs = {
     "BerkeleyHumanoidJoystickRoughTerrain": (
         berkeley_humanoid_joystick.default_config
     ),
+    "G1Contact": g1_contact.default_config,
+    "G1Stance": g1_stance.default_config,
     "G1JoystickFlatTerrain": g1_joystick.default_config,
     "G1JoystickRoughTerrain": g1_joystick.default_config,
     "Go1JoystickFlatTerrain": go1_joystick.default_config,
@@ -149,6 +159,7 @@ def register_environment(
 
 def get_default_config(env_name: str) -> config_dict.ConfigDict:
   """Get the default configuration for an environment."""
+  print(f"Available environments: {_cfgs.keys()}")
   if env_name not in _cfgs:
     raise ValueError(
         f"Env '{env_name}' not found in default configs. Available configs:"

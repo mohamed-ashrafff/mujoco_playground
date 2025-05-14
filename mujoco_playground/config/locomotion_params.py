@@ -36,7 +36,7 @@ def brax_ppo_config(env_name: str) -> config_dict.ConfigDict:
       discounting=0.97,
       learning_rate=3e-4,
       entropy_cost=1e-2,
-      num_envs=8192,
+      num_envs=1,
       batch_size=256,
       max_grad_norm=1.0,
       network_factory=config_dict.create(
@@ -89,7 +89,7 @@ def brax_ppo_config(env_name: str) -> config_dict.ConfigDict:
         value_obs_key="privileged_state",
     )
 
-  elif env_name in ("G1JoystickFlatTerrain", "G1JoystickRoughTerrain"):
+  elif env_name in ("G1JoystickFlatTerrain", "G1JoystickRoughTerrain", "G1Contact", "G1Stance"):
     rl_config.num_timesteps = 200_000_000
     rl_config.num_evals = 20
     rl_config.clipping_epsilon = 0.2
