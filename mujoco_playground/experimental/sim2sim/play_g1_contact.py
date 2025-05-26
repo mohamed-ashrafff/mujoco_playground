@@ -72,7 +72,9 @@ class OnnxController:
     joint_angles = data.qpos[7:] - self._default_angles
     joint_velocities = data.qvel[6:]
     phase = np.concatenate([np.cos(self._phase), np.sin(self._phase)])
-    command = np.array([0.0, 0.0, 0.0])
+    # command = np.array([0.0, 0.0, 0.0])
+    command = np.zeros(12, dtype=np.float32)
+
     obs = np.hstack([
         linvel,
         gyro,
@@ -114,7 +116,7 @@ def load_callback(model=None, data=None):
   model.opt.timestep = sim_dt
 
   policy = OnnxController(
-      policy_path=(_ONNX_DIR / "mash.onnx").as_posix(),
+      policy_path=(_ONNX_DIR / "g1_contact_policy.onnx").as_posix(),
       default_angles=np.array(model.keyframe("knees_bent").qpos[7:]),
       ctrl_dt=ctrl_dt,
       n_substeps=n_substeps,

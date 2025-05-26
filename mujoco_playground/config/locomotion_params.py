@@ -24,7 +24,7 @@ def brax_ppo_config(env_name: str) -> config_dict.ConfigDict:
   env_config = locomotion.get_default_config(env_name)
 
   rl_config = config_dict.create(
-      num_timesteps=100_000_000,
+      num_timesteps=100_000,
       num_evals=10,
       reward_scaling=1.0,
       episode_length=env_config.episode_length,
@@ -90,7 +90,7 @@ def brax_ppo_config(env_name: str) -> config_dict.ConfigDict:
     )
 
   elif env_name in ("G1JoystickFlatTerrain", "G1JoystickRoughTerrain", "G1Contact", "G1Stance"):
-    rl_config.num_timesteps = 200_000_000
+    rl_config.num_timesteps = 100_000
     rl_config.num_evals = 20
     rl_config.clipping_epsilon = 0.2
     rl_config.num_resets_per_eval = 1

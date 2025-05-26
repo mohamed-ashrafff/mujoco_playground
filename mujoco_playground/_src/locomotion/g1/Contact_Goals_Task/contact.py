@@ -95,6 +95,14 @@ def default_config() -> config_dict.ConfigDict:
           goal_reached_threshold=2,
           touchdown_threshold=0.2,   
       ),
+      contact_goal_config=config_dict.create(
+            contact_horizon=10,  # Number of future contact points to plan
+            step_length=0.3,     # Forward distance between consecutive steps
+            step_width=0.2,      # Lateral distance between feet
+            foot_height=0.1,     # Maximum foot height during swing
+            base_height=0.5,     # Desired robot base height
+            goal_threshold=0.05, # Distance threshold to consider goal achieved
+        ),
       lin_vel_x=[-1.0, 1.0],
       lin_vel_y=[-0.5, 0.5],
       ang_vel_yaw=[-1.0, 1.0],

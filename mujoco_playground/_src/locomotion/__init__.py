@@ -26,7 +26,7 @@ from mujoco_playground._src.locomotion.barkour import joystick as barkour_joysti
 from mujoco_playground._src.locomotion.berkeley_humanoid import joystick as berkeley_humanoid_joystick
 from mujoco_playground._src.locomotion.berkeley_humanoid import randomize as berkeley_humanoid_randomize
 from mujoco_playground._src.locomotion.g1 import joystick as g1_joystick
-from mujoco_playground._src.locomotion.g1.Contact_Goals_Task import contact as g1_contact
+from mujoco_playground._src.locomotion.g1.Contact_Goals_Task import example as g1_contact
 from mujoco_playground._src.locomotion.g1.Contact_Goals_Task import stance as g1_stance
 from mujoco_playground._src.locomotion.g1 import randomize as g1_randomize
 from mujoco_playground._src.locomotion.go1 import getup as go1_getup
@@ -51,7 +51,7 @@ _envs = {
         berkeley_humanoid_joystick.Joystick, task="rough_terrain"
     ),
     "G1Contact": functools.partial(
-      g1_contact.Contact, task="flat_terrain"
+      g1_contact.ContactEnv, task="flat_terrain"
     ),
     "G1Stance": functools.partial(
       g1_stance.Stance, task="flat_terrain"

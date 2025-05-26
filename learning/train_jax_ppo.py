@@ -264,7 +264,6 @@ def main(argv):
   ckpt_path.mkdir(parents=True, exist_ok=True)
   print(f"Checkpoint path: {ckpt_path}")
 
-  import mujoco_viewer
   
   # Save environment configuration
   with open(ckpt_path / "config.json", "w", encoding="utf-8") as fp:
@@ -324,6 +323,7 @@ def main(argv):
       policy_params_fn=policy_params_fn,
       seed=_SEED.value,
       restore_checkpoint_path=restore_checkpoint_path,
+      save_checkpoint_path=ckpt_path,
       wrap_env_fn=None if _VISION.value else wrapper.wrap_for_brax_training,
       num_eval_envs=num_eval_envs,
   )
@@ -357,7 +357,6 @@ def main(argv):
       progress_fn=progress,
       eval_env=None if _VISION.value else eval_env,
   )
-
   print("Done training.")
   if len(times) > 1:
     print(f"Time to JIT compile: {times[1] - times[0]}")
@@ -415,11 +414,11 @@ def main(argv):
   scene_option.flags[mujoco.mjtVisFlag.mjVIS_CONTACTFORCE] = False
 
 
-  # frames = eval_env.render(
-  #     traj, height=480, width=640, scene_option=scene_option
-  # )
-  # media.write_video("rollout.mp4", frames, fps=fps)
-  # print("Rollout video saved as 'rollout.mp4'.")
+  frames = eval_env.render(
+      traj, height=480, width=640, scene_option=scene_option
+  )
+  media.write_video("rollout.mp4", frames, fps=fps)
+  print("Rollout video saved as 'rollout.mp4'.")
 
 
 if __name__ == "__main__":
