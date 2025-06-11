@@ -21,8 +21,42 @@
 
   <worldbody>
     <geom name="floor" size="0 0 0.01" type="plane" material="groundplane"/>
-    <site name="left_foot_target" type="sphere" size="0.05 0.05 0.05" rgba="1 0 0 0.5"/>
-    <site name="right_foot_target" type="sphere" size="0.05 0.05 0.05" rgba="0 0 1 0.5"/>
+    <body name="left_foot_target1" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="right_foot_target1" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="left_foot_target2" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="right_foot_target2" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="left_foot_target3" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="right_foot_target3" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="left_foot_target4" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="right_foot_target4" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="left_foot_target5" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="right_foot_target5" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="left_foot_target6" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    <body name="right_foot_target6" pos="0 0 0" mocap="true">
+        <site type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
   </worldbody>
 
   <keyframe>

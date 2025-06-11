@@ -66,7 +66,7 @@ warnings.filterwarnings("ignore", category=UserWarning, module="absl")
 
 _ENV_NAME = flags.DEFINE_string(
     "env_name",
-    "LeapCubeReorient",
+    "G1Contact",
     f"Name of the environment. One of {', '.join(registry.ALL_ENVS)}",
 )
 _VISION = flags.DEFINE_boolean("vision", False, "Use vision input")
@@ -155,6 +155,8 @@ def main(argv):
   """Run training and evaluation for the specified environment."""
 
   del argv
+
+  print(f"Using environment: {_ENV_NAME.value}")
 
   # Load environment configuration
   env_cfg = registry.get_default_config(_ENV_NAME.value)
