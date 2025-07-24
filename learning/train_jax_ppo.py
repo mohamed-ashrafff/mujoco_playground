@@ -21,6 +21,8 @@ import os
 import time
 import warnings
 
+os.environ["MUJOCO_GL"] = "egl"
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -49,7 +51,9 @@ xla_flags = os.environ.get("XLA_FLAGS", "")
 xla_flags += " --xla_gpu_triton_gemm_any=True"
 os.environ["XLA_FLAGS"] = xla_flags
 os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
-os.environ["MUJOCO_GL"] = "egl"
+
+
+
 
 # Ignore the info logs from brax
 logging.set_verbosity(logging.WARNING)
@@ -109,9 +113,9 @@ _NUM_UPDATES_PER_BATCH = flags.DEFINE_integer(
 _DISCOUNTING = flags.DEFINE_float("discounting", 0.97, "Discounting")
 _LEARNING_RATE = flags.DEFINE_float("learning_rate", 5e-4, "Learning rate")
 _ENTROPY_COST = flags.DEFINE_float("entropy_cost", 5e-3, "Entropy cost")
-_NUM_ENVS = flags.DEFINE_integer("num_envs", 1024, "Number of environments")
+_NUM_ENVS = flags.DEFINE_integer("num_envs", 1, "Number of environments")
 _NUM_EVAL_ENVS = flags.DEFINE_integer(
-    "num_eval_envs", 128, "Number of evaluation environments"
+    "num_eval_envs", 1, "Number of evaluation environments"
 )
 _BATCH_SIZE = flags.DEFINE_integer("batch_size", 256, "Batch size")
 _MAX_GRAD_NORM = flags.DEFINE_float("max_grad_norm", 1.0, "Max grad norm")
@@ -283,7 +287,7 @@ def main(argv):
 
   # Initialize Weights & Biases if required
   if _USE_WANDB.value and not _PLAY_ONLY.value:
-    wandb.init(project="mjxrl", entity="dextrm", name=exp_name)
+    wandb.init(project="G1-Contact-Task", entity="mohamedash-technical-university-of-munich", name=exp_name)
     wandb.config.update(env_cfg.to_dict())
     wandb.config.update({"env_name": _ENV_NAME.value})
 
@@ -352,11 +356,13 @@ def main(argv):
   num_eval_envs = (
       ppo_params.num_envs
       if _VISION.value
-      else ppo_params.get("num_eval_envs", 128)
+      else ppo_params.get("num_eval_envs", 1)
   )
 
   if "num_eval_envs" in training_params:
     del training_params["num_eval_envs"]
+
+  print("num_envs: " + str(training_params["num_envs"]))
 
   train_fn = functools.partial(
       ppo.train,
@@ -384,8 +390,8 @@ def main(argv):
       for key, value in metrics.items():
         writer.add_scalar(key, value, num_steps)
       writer.flush()
-    if _RUN_EVALS.value:
-      print(f"{num_steps}: reward={metrics['eval/episode_reward']:.3f}")
+    # if _RUN_EVALS.value:
+    #   print(f"{num_steps}: reward={metrics['eval/episode_reward']:.3f}")
     if _LOG_TRAINING_METRICS.value:
       if "episode/sum_reward" in metrics:
         print(

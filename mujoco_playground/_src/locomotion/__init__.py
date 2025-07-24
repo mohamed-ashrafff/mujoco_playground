@@ -27,6 +27,7 @@ from mujoco_playground._src.locomotion.barkour import joystick as barkour_joysti
 from mujoco_playground._src.locomotion.berkeley_humanoid import joystick as berkeley_humanoid_joystick
 from mujoco_playground._src.locomotion.berkeley_humanoid import randomize as berkeley_humanoid_randomize
 from mujoco_playground._src.locomotion.g1 import joystick as g1_joystick
+from mujoco_playground._src.locomotion.g1 import contact as g1_contact
 from mujoco_playground._src.locomotion.g1 import randomize as g1_randomize
 from mujoco_playground._src.locomotion.go1 import getup as go1_getup
 from mujoco_playground._src.locomotion.go1 import handstand as go1_handstand
@@ -60,6 +61,9 @@ _envs = {
     ),
     "G1JoystickRoughTerrain": functools.partial(
         g1_joystick.Joystick, task="rough_terrain"
+    ),
+    "G1ContactFlatTerrain": functools.partial(
+        g1_contact.ContactEnv, task="flat_terrain"
     ),
     "Go1JoystickFlatTerrain": functools.partial(
         go1_joystick.Joystick, task="flat_terrain"
@@ -99,6 +103,7 @@ _cfgs = {
     ),
     "G1JoystickFlatTerrain": g1_joystick.default_config,
     "G1JoystickRoughTerrain": g1_joystick.default_config,
+    "G1ContactFlatTerrain": g1_contact.default_config,
     "Go1JoystickFlatTerrain": go1_joystick.default_config,
     "Go1JoystickRoughTerrain": go1_joystick.default_config,
     "Go1Getup": go1_getup.default_config,
@@ -123,6 +128,7 @@ _randomizer = {
     ),
     "G1JoystickFlatTerrain": g1_randomize.domain_randomize,
     "G1JoystickRoughTerrain": g1_randomize.domain_randomize,
+    "G1ContactFlatTerrain": g1_randomize.domain_randomize,
     "Go1JoystickFlatTerrain": go1_randomize.domain_randomize,
     "Go1JoystickRoughTerrain": go1_randomize.domain_randomize,
     "Go1Getup": go1_randomize.domain_randomize,
